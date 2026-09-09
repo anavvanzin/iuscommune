@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo, useCallback } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,16 +9,19 @@ import Team from './components/Team';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
-function App() {
+// Memoização do componente App para evitar re-renderizações desnecessárias
+const App = memo(() => {
   const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  // Callback memoizado para o handler de scroll
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 50);
   }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -33,6 +36,8 @@ function App() {
       <Footer />
     </div>
   );
-}
+});
+
+App.displayName = 'App';
 
 export default App;

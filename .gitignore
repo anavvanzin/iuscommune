@@ -1,5 +1,60 @@
+```
+# Dependencies
 node_modules/
-.next/
+
+# Build outputs
 dist/
 build/
+target/
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Cache directories
+.cache/
+.nyc_output/
+coverage/
+htmlcov/
+
+# Logs
 *.log
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# IDE specific
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Node.js specific
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Compiled JavaScript
+*.min.js
+*.bundle.js
+
+# Source maps
+*.map
+
+# Vite specific
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+```
