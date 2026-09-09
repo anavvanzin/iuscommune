@@ -43,15 +43,19 @@ const publicationCategories = [
 
 export default function Publications() {
   return (
-    <section id="publicacoes" className="py-20 md:py-28 bg-white">
+    <section id="publicacoes" className="py-20 md:py-28 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-[#d4af37] font-semibold text-sm uppercase tracking-wider">Produção Acadêmica</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a2e] mt-3">
+          <span className="text-[#d4af37] font-semibold text-sm uppercase tracking-[0.2em]">Produção Acadêmica</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a2e] mt-3 font-serif">
             Publicações
           </h2>
-          <div className="w-20 h-1 bg-[#d4af37] mx-auto mt-4 rounded-full"></div>
+          <div className="ornament-line mt-4">
+            <div className="w-16 h-0.5 bg-[#d4af37] rounded-full"></div>
+            <span className="text-[#d4af37] text-lg">§</span>
+            <div className="w-16 h-0.5 bg-[#d4af37] rounded-full"></div>
+          </div>
           <p className="max-w-2xl mx-auto text-gray-600 mt-6">
             A produção científica do grupo abrange livros, artigos, teses, dissertações e anais de eventos, 
             refletindo a diversidade de nossas linhas de pesquisa.
@@ -63,23 +67,27 @@ export default function Publications() {
           {publicationCategories.map((cat, index) => (
             <div
               key={index}
-              className="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:border-[#d4af37]/30 transition-all group"
+              className="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:border-[#d4af37]/30 transition-all group relative overflow-hidden"
             >
+              <div className="absolute top-0 left-0 w-1 h-full bg-[#d4af37] opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-12 h-12 rounded-xl bg-[#1a1a2e]/5 group-hover:bg-[#d4af37]/10 flex items-center justify-center text-[#1a1a2e] group-hover:text-[#d4af37] transition-colors">
                   {cat.icon}
                 </div>
-                <span className="text-2xl font-bold text-[#d4af37]">{cat.count}</span>
+                <span className="text-2xl font-bold text-[#d4af37] font-serif">{cat.count}</span>
               </div>
-              <h3 className="font-bold text-[#1a1a2e] mb-2">{cat.title}</h3>
+              <h3 className="font-bold text-[#1a1a2e] mb-2 font-serif">{cat.title}</h3>
               <p className="text-gray-600 text-sm">{cat.description}</p>
             </div>
           ))}
         </div>
 
         {/* Featured Publications */}
-        <div className="bg-gray-50 rounded-2xl p-8 md:p-10">
-          <h3 className="text-xl font-bold text-[#1a1a2e] mb-6 flex items-center gap-3">
+        <div className="bg-gray-50 rounded-2xl p-8 md:p-10 border border-gray-100 relative overflow-hidden">
+          {/* Decorative */}
+          <div className="absolute top-4 right-6 text-[#d4af37]/10 text-5xl font-serif">"</div>
+          
+          <h3 className="text-xl font-bold text-[#1a1a2e] mb-6 flex items-center gap-3 font-serif">
             <svg className="w-5 h-5 text-[#d4af37]" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
@@ -107,14 +115,14 @@ export default function Publications() {
                 type: 'Capítulo',
               },
             ].map((pub, index) => (
-              <div key={index} className="bg-white rounded-lg p-5 border border-gray-100 hover:border-[#d4af37]/20 transition-colors">
+              <div key={index} className="bg-white rounded-lg p-5 border border-gray-100 hover:border-[#d4af37]/20 transition-colors group">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-sm font-semibold text-[#d4af37] mb-1">{pub.author}</p>
-                    <p className="text-[#1a1a2e] font-medium text-sm leading-relaxed">{pub.title}</p>
+                    <p className="text-[#1a1a2e] font-medium text-sm leading-relaxed group-hover:text-[#16213e]">{pub.title}</p>
                     <p className="text-gray-500 text-xs mt-2 italic">{pub.journal}</p>
                   </div>
-                  <span className="flex-shrink-0 text-xs px-2 py-1 bg-[#1a1a2e]/5 text-[#1a1a2e] rounded font-medium">
+                  <span className="flex-shrink-0 text-xs px-2.5 py-1 bg-[#1a1a2e]/5 text-[#1a1a2e] rounded font-medium border border-[#1a1a2e]/10">
                     {pub.type}
                   </span>
                 </div>
@@ -127,10 +135,10 @@ export default function Publications() {
               href="https://iuscommune.paginas.ufsc.br/publicacoes/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#d4af37] font-semibold hover:text-[#c9a227] transition-colors"
+              className="inline-flex items-center gap-2 text-[#d4af37] font-semibold hover:text-[#c9a227] transition-colors group"
             >
               Ver todas as publicações
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </a>
@@ -138,15 +146,16 @@ export default function Publications() {
         </div>
 
         {/* Library */}
-        <div className="mt-12 flex flex-col md:flex-row items-center gap-6 bg-[#1a1a2e] rounded-2xl p-8 text-white">
-          <div className="w-16 h-16 rounded-xl bg-[#d4af37]/20 flex items-center justify-center flex-shrink-0">
+        <div className="mt-12 flex flex-col md:flex-row items-center gap-6 bg-[#1a1a2e] rounded-2xl p-8 text-white relative overflow-hidden">
+          <div className="absolute top-4 right-6 text-[#d4af37]/10 text-5xl font-serif italic">LIBER</div>
+          <div className="w-16 h-16 rounded-xl bg-[#d4af37]/20 flex items-center justify-center flex-shrink-0 relative">
             <svg className="w-8 h-8 text-[#d4af37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
             </svg>
           </div>
-          <div>
-            <h3 className="text-xl font-bold mb-1">Biblioteca R. von Caenegen</h3>
-            <p className="text-white/70">
+          <div className="flex-1">
+            <h3 className="text-xl font-bold mb-1 font-serif">Biblioteca R. von Caenegen</h3>
+            <p className="text-white/70 leading-relaxed">
               Acervo especializado em história da cultura jurídica disponível para consulta 
               pelos integrantes do grupo e pela comunidade acadêmica.
             </p>
@@ -157,7 +166,7 @@ export default function Publications() {
             rel="noopener noreferrer"
             className="flex-shrink-0 px-5 py-2.5 border border-[#d4af37] text-[#d4af37] rounded-lg font-medium hover:bg-[#d4af37] hover:text-[#1a1a2e] transition-colors"
           >
-            Acessar
+            Acessar →
           </a>
         </div>
       </div>

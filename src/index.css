@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @layer base {
@@ -7,12 +8,18 @@
   
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
   }
 }
 
 @layer components {
+  /* Core brand colors */
   .gradient-hero {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: linear-gradient(160deg, #0d0d1a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
   }
   
   .gradient-gold {
@@ -34,16 +41,51 @@
   .hover-gold:hover {
     color: #e8c547;
   }
-  
+
+  /* Card styles */
   .card-shadow {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
   }
   
   .card-shadow-hover:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Section divider */
+  .section-divider {
+    position: relative;
+  }
+  
+  .section-divider::after {
+    content: '§';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: #d4af37;
+    opacity: 0.4;
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* Ornamental line */
+  .ornament-line {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  
+  .ornament-line::before,
+  .ornament-line::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
   }
 }
 
+/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -60,12 +102,32 @@
   to { opacity: 1; }
 }
 
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .animate-fade-in {
   animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
 }
 
 .animate-delay-200 {
@@ -78,4 +140,45 @@
 
 .animate-delay-600 {
   animation-delay: 600ms;
+}
+
+/* Gold shimmer effect for headings */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #d4af37 0%,
+    #e8c547 25%,
+    #d4af37 50%,
+    #c9a227 75%,
+    #d4af37 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a227;
+}
+
+/* Selection color */
+::selection {
+  background-color: #d4af37;
+  color: #1a1a2e;
 }

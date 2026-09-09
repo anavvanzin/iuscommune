@@ -57,15 +57,19 @@ const researchAreas = [
 
 export default function Research() {
   return (
-    <section id="pesquisas" className="py-20 md:py-28 bg-[#f8f9fb]">
+    <section id="pesquisas" className="py-20 md:py-28 bg-[#f8f9fb] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-[#d4af37] font-semibold text-sm uppercase tracking-wider">Linhas de Pesquisa</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a2e] mt-3">
+          <span className="text-[#d4af37] font-semibold text-sm uppercase tracking-[0.2em]">Linhas de Pesquisa</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1a1a2e] mt-3 font-serif">
             Áreas de Investigação
           </h2>
-          <div className="w-20 h-1 bg-[#d4af37] mx-auto mt-4 rounded-full"></div>
+          <div className="ornament-line mt-4">
+            <div className="w-16 h-0.5 bg-[#d4af37] rounded-full"></div>
+            <span className="text-[#d4af37] text-lg">§</span>
+            <div className="w-16 h-0.5 bg-[#d4af37] rounded-full"></div>
+          </div>
           <p className="max-w-2xl mx-auto text-gray-600 mt-6">
             O grupo desenvolve pesquisas em diversas áreas da história da cultura jurídica, 
             articulando perspectivas historiográficas, teóricas e comparativas.
@@ -77,29 +81,39 @@ export default function Research() {
           {researchAreas.map((area, index) => (
             <div
               key={index}
-              className="group bg-white rounded-xl p-6 border border-gray-100 hover:border-[#d4af37]/30 transition-all duration-300 card-shadow-hover"
+              className="group bg-white rounded-xl p-6 border border-gray-100 hover:border-[#d4af37]/30 transition-all duration-300 card-shadow-hover relative overflow-hidden"
             >
-              <div className="w-14 h-14 rounded-xl bg-[#1a1a2e]/5 group-hover:bg-[#d4af37]/10 flex items-center justify-center text-[#1a1a2e] group-hover:text-[#d4af37] transition-colors mb-5">
-                {area.icon}
+              {/* Corner accent */}
+              <div className="absolute top-0 right-0 w-16 h-16 bg-[#d4af37]/5 rounded-bl-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              <div className="relative">
+                <div className="w-14 h-14 rounded-xl bg-[#1a1a2e]/5 group-hover:bg-[#d4af37]/10 flex items-center justify-center text-[#1a1a2e] group-hover:text-[#d4af37] transition-colors mb-5">
+                  {area.icon}
+                </div>
+                <h3 className="font-bold text-[#1a1a2e] text-lg mb-3 group-hover:text-[#d4af37] transition-colors font-serif">
+                  {area.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {area.description}
+                </p>
               </div>
-              <h3 className="font-bold text-[#1a1a2e] text-lg mb-3 group-hover:text-[#d4af37] transition-colors">
-                {area.title}
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {area.description}
-              </p>
             </div>
           ))}
         </div>
 
         {/* Study Groups Section */}
         <div className="mt-20 bg-[#1a1a2e] rounded-2xl p-8 md:p-12 text-white relative overflow-hidden">
+          {/* Background decorations */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37]/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#d4af37]/3 rounded-full blur-2xl"></div>
+          <div className="absolute top-6 right-8 text-[#d4af37]/10 text-6xl font-serif italic">§</div>
+
           <div className="relative">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
-                <h3 className="text-2xl font-bold mb-3">Grupo de Estudos Permanente</h3>
-                <p className="text-white/70 max-w-xl">
+                <span className="text-[#d4af37] text-xs font-semibold uppercase tracking-[0.2em]">Atividade Permanente</span>
+                <h3 className="text-2xl font-bold mt-2 mb-3 font-serif">Grupo de Estudos</h3>
+                <p className="text-white/70 max-w-xl leading-relaxed">
                   O grupo mantém encontros regulares com debates sobre obras fundamentais da história 
                   do direito e da cultura jurídica. Atualmente na 41ª edição, com temas como 
                   "Introdução Histórica ao Direito e Feminismos".
@@ -111,7 +125,7 @@ export default function Research() {
                 rel="noopener noreferrer"
                 className="flex-shrink-0 px-6 py-3 bg-[#d4af37] text-[#1a1a2e] font-semibold rounded-lg hover:bg-[#e8c547] transition-colors"
               >
-                Saiba mais
+                Saiba mais →
               </a>
             </div>
 
@@ -123,10 +137,10 @@ export default function Research() {
                 { edition: '35ª', title: 'Teologia Política (Schmitt)', year: '2022.1' },
                 { edition: '34ª', title: 'Escrever História do Direito', year: '2021' },
               ].map((ed, i) => (
-                <div key={i} className="bg-white/5 rounded-lg p-4 border border-white/10">
-                  <div className="text-[#d4af37] font-bold text-sm">{ed.edition} Edição</div>
-                  <div className="text-white/90 font-medium text-sm mt-1">{ed.title}</div>
-                  <div className="text-white/50 text-xs mt-1">{ed.year}</div>
+                <div key={i} className="bg-white/5 rounded-lg p-4 border border-white/10 hover:border-[#d4af37]/30 transition-colors group">
+                  <div className="text-[#d4af37] font-bold text-sm font-serif">{ed.edition} Edição</div>
+                  <div className="text-white/90 font-medium text-sm mt-1 group-hover:text-[#d4af37] transition-colors">{ed.title}</div>
+                  <div className="text-white/40 text-xs mt-1 font-mono">{ed.year}</div>
                 </div>
               ))}
             </div>
