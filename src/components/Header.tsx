@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo, useCallback } from 'react';
 import Logo from './Logo';
 
 interface HeaderProps {
@@ -13,10 +13,16 @@ const navItems = [
   { label: 'Publicações', href: '#publicacoes' },
   { label: 'Equipe', href: '#equipe' },
   { label: 'Contato', href: '#contato' },
-];
+] as const;
 
-export default function Header({ scrolled }: HeaderProps) {
+// Memoização do componente Header para evitar re-renderizações desnecessárias
+const Header = memo(({ scrolled }: HeaderProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Callback memoizado para toggle do menu mobile
+  const toggleMobileMenu = useCallback(() => {
+    setMobileOpen(prev => !prev);
+  }, []);
 
   return (
     <header
@@ -82,10 +88,11 @@ export default function Header({ scrolled }: HeaderProps) {
 
           {/* Mobile menu button */}
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={toggleMobileMenu}
             className={`lg:hidden p-2 rounded-lg ${
               scrolled ? 'text-gray-700' : 'text-white'
             }`}
+            aria-label="Toggle menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (
@@ -101,13 +108,14 @@ export default function Header({ scrolled }: HeaderProps) {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="lg:hidden bg-white border-t shadow-lg">
-          <nav className="px-4 py-3 space-y-1">
+          <nav className="px-4 py-3 space-y-1" role="menu">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-[#1a1a2e] font-medium"
+                role="menuitem"
               >
                 {item.label}
               </a>
@@ -125,4 +133,8 @@ export default function Header({ scrolled }: HeaderProps) {
       )}
     </header>
   );
-}
+});
+
+Header.displayName = 'Header';
+
+export default Header;
